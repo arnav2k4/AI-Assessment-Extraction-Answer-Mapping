@@ -84,11 +84,11 @@ export default function Sidebar() {
 
         <div className="min-w-0">
           <p className="truncate text-sm font-semibold text-gray-900">
-            Delhi Public School
+            School Name
           </p>
 
           <p className="truncate text-xs text-gray-500">
-            Bokaro Steel City
+            School City
           </p>
         </div>
       </div>
