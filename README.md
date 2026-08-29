@@ -1,60 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VedaAI Assessment
 
-VedaAI Assessment uses Google's Gemini API to extract questions from a question paper, match them against a student's answer sheet, and grade each answer.
+An AI-assisted grading tool. Upload a question paper and a student's handwritten answer sheet, and Gemini extracts the questions, matches each one to the student's answer, grades it, and highlights exactly where the answer appears on the sheet.
 
-## Setup
+## Live Demo
 
-1. Install dependencies:
+🔗 **[your-vercel-link-here.vercel.app](#)** — no setup required, just open the link.
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Get a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
+- Extracts every question from the question paper, preserving original numbering (including sub-parts like `1(a)`, `1(b)`)
+- Matches each question to the student's answer, even if answered out of order or across multiple pages
+- Grades each answer with a score (`marksAwarded` / `maxMarks`) and AI feedback
+- Highlights the exact answer region on the answer sheet PDF, with zoom and page navigation
+- Flags answers that couldn't be confidently matched to any question
 
-3. Copy `.env.example` to `.env` and add your key:
+## Running Locally
 
-   ```bash
-   cp .env.example .env
-   ```
+### Prerequisites
 
-   ```
-   GEMINI_API_KEY=your-key-here
-   ```
+- [Node.js](https://nodejs.org) 18 or later
+- A [Gemini API key](https://aistudio.google.com/apikey) (free to create)
 
-   `.env` is gitignored — each developer/deployment needs their own key. Never commit it.
+### 1. Clone the repository
 
-## Getting Started
+```bash
+git clone https://github.com/<your-username>/vedaai-assessment.git
+cd vedaai-assessment
+```
 
-First, run the development server:
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up your environment variable
+
+Copy the example file:
+
+```bash
+cp .env.example .env
+```
+
+Then open `.env` and add your Gemini API key:
+
+```
+GEMINI_API_KEY=your-key-here
+```
+
+> `.env` is gitignored and never committed. Each person running this project needs their own key.
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Next.js](https://nextjs.org) (App Router) + TypeScript
+- [Tailwind CSS](https://tailwindcss.com)
+- [Google Gemini API](https://ai.google.dev) for question extraction, answer matching, and grading
+- [react-pdf](https://github.com/wojtekmaj/react-pdf) / `pdfjs-dist` for in-browser PDF rendering
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This project is deployed on [Vercel](https://vercel.com). To deploy your own copy:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push this repository to GitHub.
+2. Import it into Vercel ([vercel.com/new](https://vercel.com/new)).
+3. Leave **Root Directory** as the default — the Next.js app is at the repo root.
+4. Add an environment variable `GEMINI_API_KEY` with your key under Project Settings → Environment Variables.
+5. Deploy.
