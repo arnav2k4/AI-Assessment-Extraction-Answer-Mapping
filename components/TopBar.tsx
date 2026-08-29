@@ -63,7 +63,7 @@ export default function TopBar({
             MR
           </div>
 
-          <span className="font-medium text-gray-900">Madhur Rastogi</span>
+          <span className="font-medium text-gray-900">Teacher</span>
 
           <ChevronDown size={14} className="text-gray-400" />
         </button>
