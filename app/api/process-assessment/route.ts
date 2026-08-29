@@ -926,7 +926,7 @@ Grading rules:
 - A partially correct, incomplete, or partially relevant answer earns a proportional value between 0 and maxMarks.
 - A completely incorrect or irrelevant answer earns marksAwarded = 0.
 - marksAwarded must never exceed maxMarks and must never be negative.
-- Briefly justify the awarded marks inside "feedback".
+- Briefly justify the awarded marks inside "feedback", in one short sentence (under 25 words). Do not write long explanations.
 
 ============================================================
 VALIDATION
@@ -1308,6 +1308,8 @@ export async function POST(
                   "application/json",
 
                 temperature: 0,
+
+                maxOutputTokens: 32768,
               },
             }
           );
@@ -1380,6 +1382,25 @@ export async function POST(
     console.log(
       "Gemini response received."
     );
+
+    const finishReason =
+      response.candidates?.[0]?.finishReason;
+
+    if (finishReason === "MAX_TOKENS") {
+      console.error(
+        "Gemini response was truncated (MAX_TOKENS)."
+      );
+
+      return NextResponse.json(
+        {
+          error:
+            "The assessment is too large for Gemini to fully process in one response. Try a shorter question paper or answer sheet.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
 
     // ==========================================
     // Parse JSON
