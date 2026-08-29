@@ -4,7 +4,7 @@ An AI-assisted grading tool. Upload a question paper and a student's handwritten
 
 ## Live Demo
 
-🔗 **[your-vercel-link-here.vercel.app](#)** — no setup required, just open the link.
+🔗 **https://ai-assessment-extraction-answer-mapping-kxhqnyrsn-arnav2k4.vercel.app** — no setup required, just open the link.
 
 ## Features
 
